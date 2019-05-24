@@ -10,7 +10,6 @@ import {
 import * as strings from 'NewPossumWebPartStrings';
 import NewPossum from './components/NewPossum';
 import { INewPossumProps } from './components/INewPossumProps';
-import { graph } from "@pnp/graph";
 
 export interface INewPossumWebPartProps {
   description: string;
@@ -18,20 +17,11 @@ export interface INewPossumWebPartProps {
 
 export default class NewPossumWebPart extends BaseClientSideWebPart<INewPossumWebPartProps> {
 
-  public onInit(): Promise<void> {
-    return super.onInit().then(_ => {
-      graph.setup({
-        spfxContext: this.context
-      });
-    });
-  }
-
   public render(): void {
     const element: React.ReactElement<INewPossumProps > = React.createElement(
       NewPossum,
       {
-        msGraphClientFactory: this.context.msGraphClientFactory,
-        aadHttpClientFactory: this.context.aadHttpClientFactory
+        description: this.properties.description
       }
     );
 
