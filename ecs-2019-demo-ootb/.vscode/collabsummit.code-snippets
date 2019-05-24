@@ -1,0 +1,397 @@
+{
+	"AadHttpClient get": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadget",
+		"body": [
+			"this.props.aadHttpClientFactory",
+			".getClient('8fe9d9f0-1040-414b-94a4-b96cbb493f9e')",
+			".then((client: AadHttpClient): Promise<HttpClientResponse> => {",
+			"",
+			"  return client.get('https://pnpicecreamshop.azurewebsites.net/api/flavours', AadHttpClient.configurations.v1);",
+			"})",
+			".then((response: HttpClientResponse): Promise<IceCream[]> => {",
+			"",
+			"  return response.json();",
+			"})",
+			".then((jsonResult: IceCream[]): void => {",
+			"",
+			"  this.setState({ iceCreamList: jsonResult });",
+			"})",
+			".catch(err => console.log(err));"
+		],
+		"description": "AadHttpClient get"
+	},
+	"AadHttpClient promise": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadpromise",
+		"body": [
+			".then((response: HttpClientResponse): Promise<IceCream[]> => {",
+			"",
+			"  return response.json();",
+			"})",
+			".then((jsonResult: IceCream[]): void => {",
+			"",
+			"  this.setState({ iceCreamList: jsonResult });",
+			"})",
+			".catch(err => console.log(err));"
+		],
+		"description": "AadHttpClient promise"
+	},
+	"AadHttpClient props": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadprops",
+		"body": [
+			"import { AadHttpClientFactory } from \"@microsoft/sp-http\";",
+			"",
+			"export interface IIceCreamShopProps {",
+			"  aadHttpClientFactory: AadHttpClientFactory;",
+			"}",
+		],
+		"description": "AadHttpClient props"
+	},
+	"AadHttpClient state": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadstate",
+		"body": [
+			"import { IceCream } from \"./IceCream\";",
+			"",
+			"export interface IIceCreamShopState {",
+			"  iceCreamList: IceCream[];",
+			"}",
+		],
+		"description": "AadHttpClient state"
+	},
+	"AadHttpClient constr": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadconstr",
+		"body": [
+			"constructor(props: IIceCreamShopProps) {",
+			"    super(props);",
+			"    this.state = { iceCreamList: [] };",
+			"  }",
+			"",
+			"public componentDidMount(): void {",
+			"",
+			"}"
+		],
+		"description": "AadHttpClient constr"
+	},
+	"AadHttpClient show list": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadmap",
+		"body": [
+			"{",
+			"  this.state.iceCreamList.map((iceCream: IceCream) => {",
+			"    return <div className={styles.item}>",
+			"        {iceCream.Flavour} ice cream for just {iceCream.Price}",
+			"      </div>;",
+			"    })",
+			" }"
+		],
+		"description": "AadHttpClient show list"
+	},
+	"AadHttpClient model": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadmodel",
+		"body": [
+			"export interface IceCream {",
+			"  Flavour: string;",
+			"  Price: number;",
+			"}"
+		],
+		"description": "AadHttpClient model"
+	},
+	"AadHttpClient inject": {
+		"scope": "javascript,typescript,typescriptreact",
+		"prefix": "aadinject",
+		"body": [
+			"  aadHttpClientFactory: this.context.aadHttpClientFactory",
+		],
+		"description": "AadHttpClient inject"
+	},
+	"AadHttpClient grant": {
+		"scope": "json",
+		"prefix": "aadgrant",
+		"body": [
+			"\"webApiPermissionRequests\": [",
+			"  {",
+			"    \"resource\": \"PnP.IceCreamShop\",",
+			"    \"scope\": \"Flavours.List\"",
+			"  }",
+			"]"
+		],
+		"description": "AadHttpClient grant"
+	},
+	"Graph grant": {
+		"prefix": "graphgrant",
+		"body": [
+			"\"skipFeatureDeployment\": true",
+			"\"webApiPermissionRequests\": [",
+			"      {",
+			"        \"resource\": \"Microsoft Graph\",",
+			"        \"scope\": \"Sites.ReadWrite.All\"",
+			"      }",
+			"    ]"
+		],
+		"description": "Graph grant"
+	},
+	"Graph form add": {
+		"prefix": "graphwform",
+		"body": [
+			"<form className={styles.container} onSubmit={this.saveUsingPnPjs.bind(this)}>",
+			"          <div className={styles.row}>",
+			"            <div className={styles.column}>",
+			"              <legend className={styles.title}>Add new possum to the list</legend>",
+			"              <input type=\"text\" placeholder=\"Name\" name=\"title\" onChange={this.handleInputChange.bind(this)} />",
+			"              <input type=\"text\" placeholder=\"ArrivalDate\" name=\"arrivalDate\" onChange={this.handleInputChange.bind(this)} />",
+			"              <input type=\"text\" placeholder=\"Favorite Food\" name=\"favoriteFood\" onChange={this.handleInputChange.bind(this)} />",
+			"              <button className={styles.button} type=\"submit\">Save</button>",
+			"            </div>",
+			"          </div>",
+			"          {this.state.result}",
+			"        </form>"
+		],
+		"description": "Graph form"
+	},
+	"Graph def state": {
+		"prefix": "graphdefstate",
+		"body": [
+			"constructor(props: INewPossumProps) {",
+			"    super(props);",
+			"    this.state = { title: \"\", arrivalDate: \"\", favoriteFood: \"\", result: \"\" };",
+			"  }"
+		],
+		"description": ""
+	},
+	"Graph ids": {
+		"prefix": "graphids",
+		"body": [
+			"e.preventDefault();",
+			"",
+			"    const siteId: string = \"officedevpnp.sharepoint.com,8a5649fd-3b86-4ed2-aa18-80382f78fb43,0e3dada5-cca3-41ef-93fb-93934d5a4f14\";",
+			"    const listId: string = \"251eea98-9e5c-4bd3-b1ae-a863cca47c4c\";"
+		],
+		"description": ""
+	},
+	"Graph my ids": {
+		"prefix": "graphmyids",
+		"body": [
+		  "e.preventDefault();",
+		  "",
+		  "const siteId: string = \"velingeorgiev.sharepoint.com,5950e1f2-47d5-4591-a912-6c123959e24f,7e5937b4-67ec-42e0-b68c-6a38bd194e62\";",
+		  "const listId: string = \"1adc5086-4d57-4697-b097-bfa2b411da14\";"
+		],
+		"description": ""
+	 },
+	"Graph get": {
+		"prefix": "graphget",
+		"body": [
+			"this.props.msGraphClientFactory",
+			"      .getClient()",
+			"      .then((client: MSGraphClient): Promise<HttpClientResponse> => {",
+			"        return client",
+			"          .api(`sites/\\${siteId}/lists/\\${listId}/items`)",
+			"          .version(\"v1.0\")",
+			"          .post(JSON.stringify({",
+			"            \"fields\": {",
+			"              \"Title\": this.state.title,",
+			"              \"ArrivalDate\": this.state.arrivalDate,",
+			"              \"FavoriteFood\": this.state.favoriteFood",
+			"            }",
+			"          }));",
+			"      })",
+			"      .then((res: any) => {",
+			"        this.setState({ result: JSON.stringify(res)});",
+			"      })",
+			"      .catch(error => {",
+			"        this.setState({ result: error.toString() });",
+			"      });"
+		],
+		"description": ""
+	},
+	"Graph aad opts": {
+		"prefix": "graphaadopts",
+		"body": [
+			"const opts: IHttpClientOptions = {",
+			"      headers: {",
+			"        'Content-Type': 'application/json'",
+			"      },",
+			"      body: JSON.stringify({",
+			"        \"fields\": {",
+			"          \"Title\": this.state.title,",
+			"          \"ArrivalDate\": this.state.arrivalDate,",
+			"          \"FavoriteFood\": this.state.favoriteFood",
+			"        }",
+			"      })",
+			"    };"
+		],
+		"description": ""
+	},
+	"Graph aad get": {
+		"prefix": "graphaadget",
+		"body": [
+			"this.props.aadHttpClientFactory",
+			"      .getClient('https://graph.microsoft.com')",
+			"      .then((client: AadHttpClient): Promise<HttpClientResponse> => {",
+			"        return client",
+			"          .post(",
+			"            `https://graph.microsoft.com/v1.0/sites/\\${siteId}/lists/\\${listId}/items`,",
+			"            AadHttpClient.configurations.v1, ",
+			"            opts",
+			"          );",
+			"      })",
+			"      .then((res: HttpClientResponse) => {",
+			"        return res.json();",
+			"      })",
+			"      .then((jsonResp: any) => {",
+			"        this.setState({ result: JSON.stringify(jsonResp)});",
+			"      })",
+			"      .catch(error => {",
+			"        this.setState({ result: error.toString() });",
+			"      });"
+		],
+		"description": ""
+	},
+	"Graph pnpjs": {
+		"prefix": "graphpnpjs",
+		"body": [
+			"    graph",
+			"    .sites.getById(siteId)",
+			"    .lists.getById(listId)",
+			"    .items.create({",
+			"      \"Title\": this.state.title,",
+			"      \"ArrivalDate\": this.state.arrivalDate,",
+			"      \"FavoriteFood\": this.state.favoriteFood",
+			"    } as FieldValueSet)",
+			"    .then((jsonResp: any) => {",
+			"      this.setState({ result: JSON.stringify(jsonResp.data)});",
+			"    })",
+			"    .catch(error => {",
+			"      this.setState({ result: error.toString() });",
+			"    });"
+		],
+		"description": ""
+	},
+	"Graph handle input": {
+		"prefix": "graphhandleinput",
+		"body": [
+			"private handleInputChange(event: React.ChangeEvent<any>) {",
+			"    const inputValue = event.target.value;",
+			"    const name = event.target.name;",
+			"",
+			"    this.setState((state: INewPossumState): INewPossumState => {",
+			"      state[name] = inputValue;",
+			"      return state;",
+			"    });",
+			"  }"
+		],
+		"description": ""
+	},
+	"Graph add methods": {
+		"prefix": "graphaddmethods",
+		"body": [
+			"private saveUsingMsGraphClient(e: React.ChangeEvent<any>): void {",
+			"    ",
+			"  }",
+			"",
+			"  private saveUsingAadHttpClient(e: React.ChangeEvent<any>): void {",
+			"",
+			"  }",
+			"",
+			"  private saveUsingPnPjs(e: React.ChangeEvent<any>): void {",
+			"",
+			"  }"
+		],
+		"description": ""
+	},
+	"Graph state": {
+		"prefix": "graphstate",
+		"body": [
+			"export interface INewPossumState {",
+			"  title: string;",
+			"  arrivalDate: string;",
+			"  favoriteFood: string;",
+			"  result: string;",
+			"}",
+			""
+		],
+		"description": ""
+	},
+	"Graph props": {
+		"prefix": "graphprops",
+		"body": [
+			"import { MSGraphClientFactory, AadHttpClientFactory } from \"@microsoft/sp-http\";",
+			"",
+			"export interface INewPossumProps {",
+			"  msGraphClientFactory: MSGraphClientFactory;",
+			"  aadHttpClientFactory: AadHttpClientFactory;",
+			"}"
+		],
+		"description": ""
+	},
+	"Graph pnp init": {
+		"prefix": "graphpnpinit",
+		"body": [
+		  "public onInit(): Promise<void> {",
+		  "    return super.onInit().then(_ => {",
+		  "      graph.setup({",
+		  "        spfxContext: this.context",
+		  "      });",
+		  "    });",	
+		  "  }"
+		],
+		"description": ""
+	  },
+	  "Graph input title": {
+		"prefix": "graphtitle",
+		"body": [
+		  "<input type=\"text\" placeholder=\"Name\" name=\"title\" onChange={this.handleInputChange.bind(this)} />"
+		],
+		"description": ""
+	  },
+	  "Graph input date": {
+		"prefix": "graphdate",
+		"body": [
+		  "<input type=\"text\" placeholder=\"ArrivalDate\" name=\"arrivalDate\" onChange={this.handleInputChange.bind(this)} />"
+		],
+		"description": ""
+	  },
+	  "Graph input food": {
+		"prefix": "graphfood",
+		"body": [
+		  "<input type=\"text\" placeholder=\"Favorite Food\" name=\"favoriteFood\" onChange={this.handleInputChange.bind(this)} />"
+		],
+		"description": ""
+	  },
+	  "Graph result": {
+		"prefix": "graphresult",
+		"body": [
+		  "{this.state.result}"
+		],
+		"description": ""
+	  },
+	  "Graph submit": {
+		"prefix": "graphsubmit",
+		"body": [
+		  "          <div className={styles.row}>",
+		  "            <div className={styles.column}>",
+		  "              <legend className={styles.title}>Add new possum to the list</legend>",
+		  "",
+		  "",
+		  "",
+		  "              <button className={styles.button} type=\"submit\">Save</button>",
+		  "            </div>",
+		  "          </div>"
+		],
+		"description": ""
+	  },
+	  "Graph form": {
+		"prefix": "graphform",
+		"body": [
+		  "        <form className={styles.container} onSubmit={this.save.bind(this)}>",
+		  "                  ",
+		  "        </form>"
+		],
+		"description": ""
+	  }
+}
