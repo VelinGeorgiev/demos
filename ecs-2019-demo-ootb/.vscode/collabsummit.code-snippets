@@ -393,5 +393,131 @@
 		  "        </form>"
 		],
 		"description": ""
+	  },
+	  "Graph save": {
+		"prefix": "graphsave",
+		"body": [
+		  "onSubmit={this.save.bind(this)}"
+		],
+		"description": ""
+	  },
+	  "func aadclient": {
+		"prefix": "funcaadclient",
+		"body": [
+		  "  private financeHttpClient: AadHttpClient;",
+		  "",
+		  "  protected onInit(): Promise<void> {",
+		  "    return new Promise<void>((resolve: () => void, reject: (err: any) => void): void => {",
+		  "      this.context.aadHttpClientFactory",
+		  "        .getClient('bd8e07c9-d05f-47f8-bffc-a9e019d44860')",
+		  "        .then((_financeHttpClient: AadHttpClient): void => {",
+		  "          this.financeHttpClient = _financeHttpClient;",
+		  "          resolve();",
+		  "        }, (err: any): void => {",
+		  "          reject(err);",
+		  "        });",
+		  "    });",
+		  "  }",
+		  ""
+		],
+		"description": ""
+	  },
+	  "func inject data": {
+		"prefix": "funcinjectdata",
+		"body": [
+		  "        getPossumBalance: getPossumBalance(this.financeHttpClient).bind(this),",
+		  "        updatePossumBalance: updatePossumBalance(this.financeHttpClient).bind(this)"
+		],
+		"description": ""
+	  },
+	  "func props": {
+		"prefix": "funcprops",
+		"body": [
+		  "import { IPossumBalance } from \"../../../data/types\";",
+		  "",
+		  "export interface IBalanceOverviewProps {",
+		  "  getPossumBalance: () => Promise<IPossumBalance[]>;",
+		  "  updatePossumBalance: (possum: string, newBalance: number) => Promise<IPossumBalance[]>;",
+		  "}"
+		],
+		"description": ""
+	  },
+	  "funcdataget": {
+		"prefix": "funcget",
+		"body": [
+		  "export function getPossumBalance(client: AadHttpClient): () => Promise<IPossumBalance[]> {",
+		  "    return async (): Promise<IPossumBalance[]> => {",
+		  "        const response = await client.get(`https://possumbalance.azurewebsites.net/api/HttpTrigger1`, AadHttpClient.configurations.v1);",
+		  "",
+		  "        if (response.ok) {",
+		  "            return await response.clone().json();",
+		  "        }",
+		  "",
+		  "        console.error(await response.clone().text());",
+		  "        throw Error(`Error retrieving the possum balance data`);",
+		  "    };",
+		  "}"
+		],
+		"description": ""
+	  },
+	  "funcdataupdate": {
+		"prefix": "funcupdate",
+		"body": [
+		  "export function updatePossumBalance(client: AadHttpClient): (possum: string, newBalance: number) => Promise<IPossumBalance[]> {",
+		  "    return async (possum: string, newBalance: number) => {",
+		  "        const response = await client.post(`https://possumbalance.azurewebsites.net/api/HttpTrigger1`, AadHttpClient.configurations.v1, {",
+		  "            body: JSON.stringify({",
+		  "                name: possum,",
+		  "                balance: newBalance",
+		  "            })",
+		  "        });",
+		  "",
+		  "        if (response.ok) {",
+		  "            return await response.clone().json();",
+		  "        }",
+		  "",
+		  "        console.error(await response.clone().text());",
+		  "        throw Error(`Error retrieving the possum balance data`);",
+		  "    };",
+		  "}"
+		],
+		"description": ""
+	  },
+	  "funcdidmount": {
+		"prefix": "funcdidmount",
+		"body": [
+		  "this.props",
+		  "      .getPossumBalance()",
+		  "      .then((data: IPossumBalance[]): void => {",
+		  "        this.setState({",
+		  "          loading: false,",
+		  "          balanceData: data",
+		  "        });",
+		  "      }, (err: any): void => {",
+		  "        this.setState({",
+		  "          loading: false,",
+		  "          loadingError: err.toString()",
+		  "        });",
+		  "      });"
+		],
+		"description": ""
+	  },
+	  "funcupdate": {
+		"prefix": "",
+		"body": [
+		  "this.props",
+		  "      .updatePossumBalance(this.state.newBalancePossum, Number(this.state.newBalance))",
+		  "      .then((data: IPossumBalance[]): void => {",
+		  "        this.setState({",
+		  "          updating: false,",
+		  "          balanceData: data,",
+		  "          newBalance: '',",
+		  "          newBalancePossum: ''",
+		  "        });",
+		  "      }, (err: any): void => {",
+		  "        this.setState({ updating: false, updatingError: err.toString() });",
+		  "      });"
+		],
+		"description": ""
 	  }
 }

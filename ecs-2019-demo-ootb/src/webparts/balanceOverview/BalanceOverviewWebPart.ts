@@ -10,35 +10,18 @@ import {
 import * as strings from 'BalanceOverviewWebPartStrings';
 import BalanceOverview from './components/BalanceOverview';
 import { IBalanceOverviewProps } from './components/IBalanceOverviewProps';
-import { getPossumBalance, updatePossumBalance } from '../../data/possum-data';
-import { AadHttpClient } from '@microsoft/sp-http';
 
 export interface IBalanceOverviewWebPartProps {
   description: string;
 }
 
 export default class BalanceOverviewWebPart extends BaseClientSideWebPart<IBalanceOverviewWebPartProps> {
-  private financeHttpClient: AadHttpClient;
-
-  protected onInit(): Promise<void> {
-    return new Promise<void>((resolve: () => void, reject: (err: any) => void): void => {
-      this.context.aadHttpClientFactory
-        .getClient('bd8e07c9-d05f-47f8-bffc-a9e019d44860')
-        .then((_financeHttpClient: AadHttpClient): void => {
-          this.financeHttpClient = _financeHttpClient;
-          resolve();
-        }, (err: any): void => {
-          reject(err);
-        });
-    });
-  }
 
   public render(): void {
     const element: React.ReactElement<IBalanceOverviewProps > = React.createElement(
       BalanceOverview,
       {
-        getPossumBalance: getPossumBalance(this.financeHttpClient).bind(this),
-        updatePossumBalance: updatePossumBalance(this.financeHttpClient).bind(this)
+        description: "description"
       }
     );
 

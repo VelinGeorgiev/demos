@@ -29,19 +29,6 @@ export default class BalanceOverview extends React.Component<IBalanceOverviewPro
 
   public componentDidMount() {
     this.setState({ loading: true, loadingError: undefined });
-    this.props
-      .getPossumBalance()
-      .then((data: IPossumBalance[]): void => {
-        this.setState({
-          loading: false,
-          balanceData: data
-        });
-      }, (err: any): void => {
-        this.setState({
-          loading: false,
-          loadingError: err.toString()
-        });
-      });
   }
 
   private handleNameInputChange(event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) {
@@ -54,18 +41,6 @@ export default class BalanceOverview extends React.Component<IBalanceOverviewPro
 
   private handleUpdateButtonClick(event?: React.MouseEvent<HTMLButtonElement>) {
     this.setState({ updating: true, updatingError: undefined });
-    this.props
-      .updatePossumBalance(this.state.newBalancePossum, Number(this.state.newBalance))
-      .then((data: IPossumBalance[]): void => {
-        this.setState({
-          updating: false,
-          balanceData: data,
-          newBalance: '',
-          newBalancePossum: ''
-        });
-      }, (err: any): void => {
-        this.setState({ updating: false, updatingError: err.toString() });
-      });
   }
 
   private canSubmitNewBalance(): boolean {
