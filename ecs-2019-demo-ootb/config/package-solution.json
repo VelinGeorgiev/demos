@@ -5,10 +5,10 @@
     "id": "414c35b1-84de-45e0-87ec-bcb3c49fe05e",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
-    "isDomainIsolated": false,
+    "skipFeatureDeployment": true,
     "webApiPermissionRequests": [
       {
-        "resource": "possumpete-api",
+        "resource": "PossumBalance",
         "scope": "user_impersonation"
       }
     ]

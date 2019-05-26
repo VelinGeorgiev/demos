@@ -77,7 +77,7 @@ export async function getPossumStatusList(client: SPHttpClient): Promise<IPossum
 
 export function getPossumBalance(client: AadHttpClient): () => Promise<IPossumBalance[]> {
     return async (): Promise<IPossumBalance[]> => {
-        const response = await client.get(`https://possumpete-api.azurewebsites.net/api/Finance`, AadHttpClient.configurations.v1);
+        const response = await client.get(`https://possumbalance.azurewebsites.net/api/HttpTrigger1`, AadHttpClient.configurations.v1);
 
         if (response.ok) {
             return await response.clone().json();
@@ -90,7 +90,7 @@ export function getPossumBalance(client: AadHttpClient): () => Promise<IPossumBa
 
 export function updatePossumBalance(client: AadHttpClient): (possum: string, newBalance: number) => Promise<IPossumBalance[]> {
     return async (possum: string, newBalance: number) => {
-        const response = await client.post(`https://possumpete-api.azurewebsites.net/api/Finance`, AadHttpClient.configurations.v1, {
+        const response = await client.post(`https://possumbalance.azurewebsites.net/api/HttpTrigger1`, AadHttpClient.configurations.v1, {
             body: JSON.stringify({
                 name: possum,
                 balance: newBalance

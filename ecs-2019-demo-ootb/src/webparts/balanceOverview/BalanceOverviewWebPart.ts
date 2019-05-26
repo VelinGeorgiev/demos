@@ -23,7 +23,7 @@ export default class BalanceOverviewWebPart extends BaseClientSideWebPart<IBalan
   protected onInit(): Promise<void> {
     return new Promise<void>((resolve: () => void, reject: (err: any) => void): void => {
       this.context.aadHttpClientFactory
-        .getClient('https://possumpete-api.azurewebsites.net')
+        .getClient('bd8e07c9-d05f-47f8-bffc-a9e019d44860')
         .then((_financeHttpClient: AadHttpClient): void => {
           this.financeHttpClient = _financeHttpClient;
           resolve();
